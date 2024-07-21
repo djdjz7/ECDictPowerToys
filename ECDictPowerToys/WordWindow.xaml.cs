@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.UI;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using static SystemBackdropTypes.PInvoke.ParameterTypes;
+using static SystemBackdropTypes.PInvoke.Methods;
 
 namespace Community.PowerToys.Run.Plugin.ECDict
 {
     /// <summary>
     /// WordWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class WordWindow : MicaWPF.Lite.Controls.MicaWindow
+    public partial class WordWindow : Window
     {
-        public WordWindow(Dictionary<string, object> info)
+        private bool _isDarkMode;
+        public WordWindow(Dictionary<string, object> info, bool isDarkMode)
         {
+            _isDarkMode = isDarkMode;
+            Loaded += OnLoaded;
             InitializeComponent();
+
+            if(_isDarkMode)
+            {
+                Resources["TextElementBrush"] = new SolidColorBrush(Colors.White);
+            }
 
             var word = info["word"] as string;
             var phonetic = info["phonetic"] as string;
@@ -34,7 +35,7 @@ namespace Community.PowerToys.Run.Plugin.ECDict
             Phonetic.Text = $"/{phonetic}/";
             Translation.Text = translation;
 
-            if(string.IsNullOrEmpty(phonetic))
+            if (string.IsNullOrEmpty(phonetic))
                 Phonetic.Visibility = Visibility.Collapsed;
         }
 
@@ -57,6 +58,30 @@ namespace Community.PowerToys.Run.Plugin.ECDict
                 Close();
             }
             catch { }
+        }
+
+        void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            IntPtr mainWindowPtr = new WindowInteropHelper(this).Handle;
+            HwndSource mainWindowSrc = HwndSource.FromHwnd(mainWindowPtr);
+            mainWindowSrc.CompositionTarget.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
+
+            MARGINS margins = new MARGINS();
+            margins.cxLeftWidth = -1;
+            margins.cxRightWidth = -1;
+            margins.cyTopHeight = -1;
+            margins.cyBottomHeight = -1;
+
+            ExtendFrame(mainWindowSrc.Handle, margins);
+            int flag = _isDarkMode ? 1 : 0;
+            SetWindowAttribute(
+                new WindowInteropHelper(this).Handle,
+                DWMWINDOWATTRIBUTE.DWMWA_USE_IMMERSIVE_DARK_MODE,
+                flag);
+            SetWindowAttribute(
+                new WindowInteropHelper(this).Handle,
+                DWMWINDOWATTRIBUTE.DWMWA_SYSTEMBACKDROP_TYPE,
+                2);
         }
     }
 }

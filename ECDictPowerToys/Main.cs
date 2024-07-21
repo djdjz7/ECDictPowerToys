@@ -80,7 +80,7 @@ ORDER BY
                 Action = _ =>
                 {
 
-                    new WordWindow(entry).Show();
+                    new WordWindow(entry, IsThemeDark(_context.API.GetCurrentTheme())).Show();
                     return true;
                 }
             };
@@ -91,7 +91,7 @@ ORDER BY
 
     private void UpdateIconPath(Theme theme)
     {
-        if (theme == Theme.Light || theme == Theme.HighContrastWhite)
+        if (!IsThemeDark(theme))
         {
             _icoPath = "Images/icon-light.png";
         }
@@ -100,4 +100,7 @@ ORDER BY
             _icoPath = "Images/icon-dark.png";
         }
     }
+
+    private bool IsThemeDark(Theme theme)
+        => theme == Theme.Dark || theme == Theme.HighContrastBlack;
 }
