@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutputType>Library</OutputType>
+		<UseWindowsForms>False</UseWindowsForms>
+		<UseWPF>True</UseWPF>
+		<Platforms>x64;ARM64</Platforms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MicaWPF.Lite" Version="6.2.8" />
+		<PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Platform)' == 'x64'">
+		<Reference Include="Libs\x64\PowerToys.Common.UI.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\x64\PowerToys.ManagedCommon.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\x64\PowerToys.Settings.UI.Lib.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\x64\Wox.Infrastructure.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\x64\Wox.Plugin.dll">
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Platform)' == 'ARM64'">
+		<Reference Include="Libs\ARM64\PowerToys.Common.UI.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\ARM64\PowerToys.ManagedCommon.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\ARM64\PowerToys.Settings.UI.Lib.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\ARM64\Wox.Infrastructure.dll">
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Libs\ARM64\Wox.Plugin.dll">
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="ecdict.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\Everything.dark.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\Everything.light.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\file.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\folder.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\icon-dark.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\icon-light.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Images\warning.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="plugin.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="call PostBuild.bat" />
+	</Target>
+
+</Project>

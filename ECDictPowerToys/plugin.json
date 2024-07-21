@@ -1,0 +1,14 @@
+﻿{
+  "ID": "C5BF1E05CD25451A8CC02B216A44C3F7",
+  "ActionKeyword": "'",
+  "IsGlobal": true,
+  "Name": "ECDict",
+  "Author": "Jason Dai",
+  "Version": "0.82.1",
+  "Language": "csharp",
+  "Website": "",
+  "ExecuteFileName": "Community.PowerToys.Run.Plugin.ECDict.dll",
+  "IcoPathDark": "Images\\icon-dark.png",
+  "IcoPathLight": "Images\\icon-light.png",
+  "DynamicLoading":  true
+}

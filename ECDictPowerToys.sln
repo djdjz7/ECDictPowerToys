@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Community.PowerToys.Run.Plugin.ECDict", "ECDictPowerToys\Community.PowerToys.Run.Plugin.ECDict.csproj", "{5FDD1934-845B-4239-9422-0CFDC77B15CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Debug|ARM64.ActiveCfg = Debug|x64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Debug|ARM64.Build.0 = Debug|x64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Debug|x64.ActiveCfg = Debug|x64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Debug|x64.Build.0 = Debug|x64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Release|ARM64.ActiveCfg = Release|ARM64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Release|ARM64.Build.0 = Release|ARM64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Release|x64.ActiveCfg = Release|x64
+		{5FDD1934-845B-4239-9422-0CFDC77B15CC}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA380AE5-D3EF-45E1-9BF2-F3955F3AC205}
+	EndGlobalSection
+EndGlobal
