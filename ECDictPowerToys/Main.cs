@@ -14,13 +14,13 @@ public class Main : IPlugin, IDelayedExecutionPlugin
     public string Description => "一个离线的英中词典";
     private string _queryCommandText =
 @"SELECT * FROM Dictionary
-WHERE word LIKE '% ' || $word || ' %'
-OR word LIKE '% ' || $word
-OR word LIKE $word || ' %'
-OR word = $word
+WHERE word COLLATE NOCASE LIKE '% ' || $word || ' %'
+OR word COLLATE NOCASE LIKE '% ' || $word
+OR word COLLATE NOCASE LIKE $word || ' %'
+OR word COLLATE NOCASE = $word
 ORDER BY 
   CASE 
-    WHEN word = $word THEN 0
+    WHEN word COLLATE NOCASE = $word THEN 0
     ELSE 1
   END,
   word;
